@@ -3,10 +3,9 @@ import os
 import json
 from threading import Thread
 
-from bottle import Bottle, run, request, response
+from bottle import Bottle, request, response
 
-from _.retrieve import mailbox
-from _.parse import parse
+from _ import run
 
 messages = {}
 b = Bottle()
@@ -18,19 +17,6 @@ def root():
     response.status = 200
     return json.dumps(messages)
 
-def main():
-    host = os.environ['posse_host']
-    username = os.environ['posse_email_address']
-    password = os.environ['posse_password']
-    emails = mailbox(host, username, password)
-    t = Thread(None, target = receive_messages,
-               name = 'receive', args = (emails, messages))
-    run(b)
-
-def receive_messages(emails, target:dict):
-    for email in emails:
-        message_id, date, subject, body = parse(email)
-        target[message_id] = date, subject, body
 
 if __name__ == '__main__':
     main()

@@ -1,3 +1,4 @@
+import os
 from distutils.core import setup
 
 setup(name='_',
@@ -9,6 +10,7 @@ setup(name='_',
         'Intended Audience :: Developers',
     ],
     packages=['_'],
+    scripts=[os.path.join('bin','_')],
     install_requires = [],
     tests_require = ['nose'],
     version='0.0.1',

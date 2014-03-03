@@ -5,9 +5,6 @@ import datetime
 
 def parse(message:bytes) -> tuple:
     m = message_from_bytes(message)
-    if not {'subject','date'}.issuperset(m.keys()):
-        return None
-
     message_id = _parse_message_id(m['message-id'])
     date = _parse_date(m['date'])
     subject = m['subject']

@@ -7,7 +7,7 @@ def mailbox(host:str, address:str, password:str,
     try:
         M = IMAP4_SSL(host)
         M.login(address, password)
-        M.select('Inbox')
+        M.select('INBOX')
         finished_nums = set()
         while True:
             typ, data = M.search(None, 'ALL')

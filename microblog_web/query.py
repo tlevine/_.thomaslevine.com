@@ -1,5 +1,6 @@
 def seq(messages, start = 0, end = None):
-    return list(reversed(sorted(messages)))[start:end]
+    keys = list(reversed(sorted(messages.keys())))[start:end]
+    return [messages[k] for k in keys]
 
 def page(messages, n, step = 10):
     return seq(messages, step * n, step * (n + 1))

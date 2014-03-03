@@ -1,4 +1,8 @@
+PYTHONPATH := "$(PYTHONPATH):$(PWD)" 
+export PYTHONPATH
+
 serve:
+	@echo $(shell echo '$$PYTHONPATH')
 	./bin/_
 
 test:

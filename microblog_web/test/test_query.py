@@ -3,8 +3,7 @@ import nose.tools as n
 import microblog_web.query as query
 
 seq_testcases = [
-    (query.seq, reversed(range(86,100)), range(100), 0, 14),
-    (query.seq, 'zzz', 'honunhnozzezztzzzuzzzozzzeuthaaa', 0, 3),
+    (query.seq, 'zzg', dict(zip(range(10), 'aaaaaaagzg')), 0, 3),
 ]
 
 def check(func, expected, *args):

@@ -1,21 +1,11 @@
 #!/usr/bin/env python3
 import os
-import json
 from threading import Thread
 
-from bottle import Bottle, request, response, run
+from bottle import run
 
-from _ import receive_messages
-
-messages = {}
-b = Bottle()
-
-@b.get('/')
-def root():
-    response.set_header('Content-Language', 'en')
-    response.set_header('Content-Type', 'application/json; charset=utf-8')
-    response.status = 200
-    return json.dumps(messages)
+from microblog_email import receive_messages
+from microblog_web import app, messages
 
 def main():
     host = os.environ['posse_host']

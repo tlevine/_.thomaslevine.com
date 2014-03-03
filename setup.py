@@ -9,7 +9,7 @@ setup(name='_',
     classifiers=[
         'Intended Audience :: Developers',
     ],
-    packages=['microblog_db','microblog_web'],
+    packages=['microblog_email','microblog_web'],
     scripts=[os.path.join('bin','_')],
     install_requires = [],
     tests_require = ['nose'],

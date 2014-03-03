@@ -1,9 +1,11 @@
+import datetime
+
 from bottle import template
 
 def render_post(message):
     datestamp, subject, body = message
     params = {'date':datetime.datetime.fromtimestamp(datestamp),'subject':subject,'body':body}
-    return template(templates.post, params)
+    return template(post, params)
 
 post = '''<html>
 <head>

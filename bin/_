@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import json
 from threading import Thread
 
 from bottle import Bottle, run, request, response
@@ -18,6 +19,9 @@ def root():
     return json.dumps(messages)
 
 def main():
+    host = os.environ['posse_host']
+    username = os.environ['posse_email_address']
+    password = os.environ['posse_password']
     emails = mailbox(host, username, password)
     t = Thread(None, target = receive_messages,
                name = 'receive', args = (emails, messages))

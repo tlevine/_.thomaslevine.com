@@ -3,9 +3,9 @@ import os
 import json
 from threading import Thread
 
-from bottle import Bottle, request, response
+from bottle import Bottle, request, response, run
 
-from _ import run
+from _ import receive_messages
 
 messages = {}
 b = Bottle()
@@ -17,6 +17,14 @@ def root():
     response.status = 200
     return json.dumps(messages)
 
+def main():
+    host = os.environ['posse_host']
+    username = os.environ['posse_email_address']
+    password = os.environ['posse_password']
+    args = host, username, password
+    t = Thread(None, target = receive_messages,
+               name = 'receive', args = (args, messages))
+    run(b)
 
 if __name__ == '__main__':
     main()

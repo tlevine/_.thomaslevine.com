@@ -6,14 +6,23 @@ from bottle import Bottle, run, request, response
 from retrieve import mailbox
 from parse import parse
 
-def main():
-    messages = {}
-    b = Bottle()
-    emails = mailbox(host, username, password)
-    t1 = Thread(None, target = receive_messages,
-                name = 'receive', args = (emails, messages))
+messages = {}
+b = Bottle()
 
-def receive_messages(the_mailbox, target:dict):
-    for email in the_mailbox:
+@b.get('/')
+def root():
+    response.set_header('Content-Language', 'en')
+    response.set_header('Content-Type', 'application/json; charset=utf-8')
+    response.status = 200
+    return json.dumps(messages)
+
+def main():
+    emails = mailbox(host, username, password)
+    t = Thread(None, target = receive_messages,
+               name = 'receive', args = (emails, messages))
+    run(b)
+
+def receive_messages(emails, target:dict):
+    for email in emails:
         message_id, date, subject, body = parse(email)
         target[message_id] = date, subject, body

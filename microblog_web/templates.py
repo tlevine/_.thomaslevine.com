@@ -4,8 +4,9 @@ from bottle import template
 
 
 def _convert(message):
-    datestamp, subject, body = message
-    return {'date':datetime.datetime.fromtimestamp(datestamp),'subject':subject,'body':body.strip()}
+    message_id, datestamp, subject, body = message
+    return {'subject':subject,'body':body.strip(), 'message_id': message_id,
+            'date':datetime.datetime.fromtimestamp(datestamp)}
 
 def render_root(messages):
     return template(root, {'messages': map(_convert, messages)})

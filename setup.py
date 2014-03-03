@@ -11,7 +11,7 @@ setup(name='_',
     ],
     packages=['microblog_email','microblog_web'],
     scripts=[os.path.join('bin','_')],
-    install_requires = [],
+    install_requires = ['bottle'],
     tests_require = ['nose'],
     version='0.0.1',
     license='AGPL'

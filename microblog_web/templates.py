@@ -4,7 +4,7 @@ from bottle import template
 
 def render_post(message):
     datestamp, subject, body = message
-    params = {'date':datetime.datetime.fromtimestamp(datestamp),'subject':subject,'body':body}
+    params = {'date':datetime.datetime.fromtimestamp(datestamp),'subject':subject,'body':body.strip()}
     return template(post, params)
 
 post = '''<html>

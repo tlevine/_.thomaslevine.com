@@ -5,6 +5,7 @@ import microblog_web.query as query
 seq_testcases = [
     (query.seq, 'agz', dict(zip(range(10), 'aaaaagazga')), 0, 3),
     (query.seq, 'acb', dict(zip([3,1,2,-23,0], 'abcaz')), 0, 3),
+    (query.seq, 'acbza', dict(zip([3,1,2,-23,0], 'abcaz')), 0, 10),
 ]
 
 def check(func, expected, *args):

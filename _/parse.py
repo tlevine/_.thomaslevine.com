@@ -17,4 +17,4 @@ def _parse_date(raw_date:str) -> datetime.datetime:
     return datetime.datetime.fromtimestamp(mktime(parsedate(raw_date)))
 
 def _parse_message_id(raw_message_id):
-    re.match(r'^<([^@]+).*', raw_message_id).group(1)
+    return re.match(r'^<([^@]+).*', raw_message_id).group(1)

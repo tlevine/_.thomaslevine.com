@@ -1,5 +1,5 @@
-from _.retrieve import mailbox
-from _.parse import parse
+from microblog_email.retrieve import mailbox
+from microblog_email.parse import parse
 
 def receive_messages(args, target:dict):
     for email in mailbox(*args):

@@ -2,7 +2,7 @@ import os
 
 import nose.tools as n
 
-from _.parse import parse
+from microblog_email.parse import parse
 
 def test_parse():
     with open(os.path.join('_','test','fixtures','email'), 'rb') as fp:

@@ -1,6 +1,6 @@
 import nose.tools as n
 
-from _.retrieve import mailbox
+from microblog_email.retrieve import mailbox
 
 i = {
     'ran_login ': False,

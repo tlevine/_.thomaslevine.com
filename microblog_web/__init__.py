@@ -9,4 +9,4 @@ def root():
     response.set_header('Content-Language', 'en')
     response.set_header('Content-Type', 'application/json; charset=utf-8')
     response.status = 200
-    return json.dumps(messages)
+    return json.dumps(page(messages, 1))

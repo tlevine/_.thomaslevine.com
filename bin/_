@@ -1,2 +1,7 @@
+from bottle import Bottle, run, request, response
+
 from retrieve import mailbox
 from parse import parse
+
+b = Bottle()
+messages = {}

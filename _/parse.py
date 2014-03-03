@@ -7,10 +7,15 @@ def parse(message:bytes) -> tuple:
     m = message_from_bytes(message)
     if not {'subject','date'}.issuperset(m.keys()):
         return None
+
+    message_id = _parse_message_id(m['message-id'])
     date = _parse_date(m['date'])
     subject = m['subject']
     body = m.get_payload()
-    return date, subject, body
+    return message_id, date, subject, body
 
 def _parse_date(raw_date:str) -> datetime.datetime:
     return datetime.datetime.fromtimestamp(mktime(parsedate(raw_date)))
+
+def _parse_message_id(raw_message_id):
+    re.match(r'^<([^@]+).*', raw_message_id).group(1)

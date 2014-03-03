@@ -1,7 +1,7 @@
 import json
 import datetime
 
-from bottle import Bottle, request, response, abort, redirect, template
+from bottle import Bottle, request, response, abort, redirect
 
 from microblog_web.query import page
 import microblog_web.templates as templates
@@ -19,9 +19,7 @@ def root():
 @app.get('/<message_id>')
 def post(message_id):
     if message_id in messages:
-        datestamp, subject, body = messages[message_id]
-        params = {'datestamp':datetime.datetime.fromtimestamp(datestamp),'subject':subject,'body':body}
-        return template(templates.post, params)
+        return templates.render_post(messages[message_id])
     else:
         abort(404, "There's no post with this message-id.")
 

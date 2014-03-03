@@ -12,7 +12,7 @@ post = '''<html>
 </head>
 <body>
   <h1>{{subject}}</h1>
-  <time datetime="{{date.isoformat()}}">{{date.strftime('%A, %B %d at %H:%m UTC')}}</time>
+  <time datetime="{{date.isoformat()}}">{{date.strftime('%A, %B %d at %H:%M UTC')}}</time>
   <p>{{body}}</p>
 </body>
 </html>

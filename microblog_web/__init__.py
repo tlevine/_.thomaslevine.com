@@ -11,6 +11,7 @@ app = Bottle()
 
 @app.get('/')
 def root():
+    return templates.render_root(messages.values())
     return templates.render_root(query.seq(messages, 0, 10))
 
 @app.get('/<message_id>')

@@ -1,2 +1,2 @@
-from imaplib import message_from_bytes
+from email import message_from_bytes
 message_from_bytes

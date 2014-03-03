@@ -24,6 +24,7 @@ def main():
     args = host, username, password
     t = Thread(None, target = receive_messages,
                name = 'receive', args = (args, messages))
+    t.start()
     run(b)
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ def mailbox(host:str, address:str, password:str,
             IMAP4_SSL = _IMAP4_SSL, sleep = _sleep):
 
     try:
-        M = imaplib.IMAP4_SSL(host)
+        M = IMAP4_SSL(host)
         M.login(address, password)
         M.select('Inbox')
         finished_nums = set()

@@ -9,7 +9,6 @@ def test_render_post():
     message = ('foobar', d.timestamp(), 'Subject goes here.', 'Body goes here.')
     result = templates.render_post(message)
 
-    n.assert_in('href="/foobar"', result)
     #n.assert_in(, result)
     n.assert_in('Monday, March 03 at 05:27 UTC', result)
     n.assert_in('Subject goes here.', result)

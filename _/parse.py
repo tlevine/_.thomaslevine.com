@@ -13,6 +13,7 @@ def parse(message:bytes) -> tuple:
     return message_id, date, subject, body
 
 def _parse_date(raw_date:str) -> datetime.datetime:
+    return mktime(parsedate(raw_date))
     return datetime.datetime.fromtimestamp(mktime(parsedate(raw_date)))
 
 def _parse_message_id(raw_message_id):

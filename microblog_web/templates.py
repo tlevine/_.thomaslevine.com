@@ -2,10 +2,16 @@ import datetime
 
 from bottle import template
 
-def render_post(message):
+
+def _convert(message):
     datestamp, subject, body = message
-    params = {'date':datetime.datetime.fromtimestamp(datestamp),'subject':subject,'body':body.strip()}
-    return template(post, params)
+    return {'date':datetime.datetime.fromtimestamp(datestamp),'subject':subject,'body':body.strip()}
+
+def render_root(messages):
+    return template(root, {'messages': map(_convert, messages)})
+
+def render_post(message):
+    return template(post, _convert(message))
 
 post = '''<html>
 <head>
@@ -19,8 +25,10 @@ post = '''<html>
 '''
 
 root = '''<html>
-    {{datestamp}}
-    {{subject}}
-    {{body}}
+% for message in messages:
+  <h2>{{message.subject}}</h2>
+  <time datetime="{{message.date.isoformat()}}">{{message.date.strftime('%A, %B %d at %H:%M UTC')}}</time>
+  <p>{{body}}</p>
+% end
 </html>
 '''

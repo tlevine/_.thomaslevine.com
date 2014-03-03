@@ -1,7 +1,19 @@
+import os
+from threading import Thread
+
 from bottle import Bottle, run, request, response
 
 from retrieve import mailbox
 from parse import parse
 
-b = Bottle()
-messages = {}
+def main():
+    messages = {}
+    b = Bottle()
+    emails = mailbox(host, username, password)
+    t1 = Thread(None, target = receive_messages,
+                name = 'receive', args = (emails, messages))
+
+def receive_messages(the_mailbox, target:dict):
+    for email in the_mailbox:
+        message_id, date, subject, body = parse(email)
+        target[message_id] = date, subject, body

@@ -3,7 +3,7 @@ import datetime
 
 from bottle import Bottle, request, response, abort, redirect
 
-from microblog_web.query import page
+import microblog_web.query as query
 import microblog_web.templates as templates
 
 messages = {}
@@ -11,7 +11,7 @@ app = Bottle()
 
 @app.get('/')
 def root():
-    return templates.render_root(messages)
+    return templates.render_root(query.seq(messages, 0, 10))
 
 @app.get('/<message_id>')
 def post(message_id):

@@ -12,10 +12,13 @@ def main():
     username = os.environ['posse_email_address']
     password = os.environ['posse_password']
     args = host, username, password
-    t = Thread(None, target = receive_messages,
-               name = 'receive', args = (args, messages))
-    t.start()
-    run(app)
+
+    receiver = Thread(None, target = receive_messages,
+                name = 'receive', args = (args, messages))
+    web = Thread(None, target = run, name = 'run', args = (app,))
+
+    receiver.start()
+    web.start()
 
 if __name__ == '__main__':
     main()

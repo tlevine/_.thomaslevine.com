@@ -1,3 +1,4 @@
+import re
 from email import message_from_bytes
 from email.utils import parsedate
 from time import mktime

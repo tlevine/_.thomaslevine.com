@@ -26,9 +26,9 @@ post = '''<html>
 
 root = '''<html>
 % for message in messages:
-  <h2>{{message.subject}}</h2>
-  <time datetime="{{message.date.isoformat()}}">{{message.date.strftime('%A, %B %d at %H:%M UTC')}}</time>
-  <p>{{body}}</p>
+  <h2>{{message['subject']}}</h2>
+  <time datetime="{{message['date'].isoformat()}}">{{message['date'].strftime('%A, %B %d at %H:%M UTC')}}</time>
+  <p>{{message['body']}}</p>
 % end
 </html>
 '''

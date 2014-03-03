@@ -1,8 +1,6 @@
-PYTHONPATH := "$(PYTHONPATH):$(PWD)" 
-export PYTHONPATH
-
 serve:
-	@echo $(shell echo '$$PYTHONPATH')
+	# So messy
+	sudo pip3 install . --upgrade
 	./bin/_
 
 test:

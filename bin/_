@@ -15,7 +15,7 @@ def main():
     t = Thread(None, target = receive_messages,
                name = 'receive', args = (args, messages))
     t.start()
-    run(b)
+    run(app)
 
 if __name__ == '__main__':
     main()

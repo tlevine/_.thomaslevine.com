@@ -26,6 +26,7 @@ post = '''<html>
 '''
 
 root = '''<html>
+<h1>_</h1>
 % for message in messages:
   <h2><a href="/{{message['message_id']}}">{{message['subject']}}</a></h2>
   <time datetime="{{message['date'].isoformat()}}">{{message['date'].strftime('%A, %B %d at %H:%M UTC')}}</time>

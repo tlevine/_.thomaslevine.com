@@ -18,7 +18,7 @@ def three_not_forwarded(*args, **kwargs):
     for i in range(3):
         yield fixtures['not-forwarded']
 
-expected_forwarding = {'20140303035053.GA18216': [1393818653.0, 'aoeuaoeu', 'oeu\r\n']}
+expected_forwarding = {'20140303035053.GA18216': ('20140303035053.GA18216', 1393818653.0, 'aoeuaoeu', 'oeu\r\n')}
 expected_not_forwarding = {}
 
 def test_target_none():

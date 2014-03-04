@@ -8,7 +8,7 @@ from microblog_email import receive_messages
 fixtures = {}
 for fn in ['forwarded', 'not-forwarded']:
     with open(os.path.join('microblog_email','test','fixtures', fn), 'rb') as fp:
-        fixtures[fn] = parse(fp.read())
+        fixtures[fn] = (fp.read())
 
 def three_forwarded(*args, **kwargs):
     for i in range(3):

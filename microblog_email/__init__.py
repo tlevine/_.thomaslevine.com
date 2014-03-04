@@ -31,8 +31,8 @@ def receive_messages(host:str, address:str, password:str,
     '''
     for email in mailbox(host, address, password):
         identifier, date, sent_from, forwarding, subject, body = parse(email)
-        if forwarding_address is not None and forwarding_address in forwarding:
-            if sending_address is not None and sending_address in sent_from:
+        if forwarding_address is None or forwarding_address in forwarding:
+            if sending_address is None or sending_address in sent_from:
                 results = identifier, date, subject, body
                 if target is None:
                     yield results

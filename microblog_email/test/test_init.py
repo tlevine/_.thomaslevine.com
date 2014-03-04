@@ -34,33 +34,28 @@ def test_target_dict():
 
 def test_forwarded_set_match():
     observed = receive_messages('not host', 'not address', 'not password',
-                                sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = 'forwarding@thomaslevine.com',
                                 mailbox = forwarded)
     n.assert_equal(observed, expect_yes)
 
     observed = receive_messages('not host', 'not address', 'not password',
-                                sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = 'forwarding@thomaslevine.com',
                                 mailbox = not_forwarded)
     n.assert_equal(observed, expect_no)
 
 def test_forwarded_set_nomatch():
     observed = receive_messages('not host', 'not address', 'not password',
-                                sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = 'blah@thomaslevine.com',
                                 mailbox = forwarded)
     n.assert_equal(observed, expect_no)
 
 def test_forwarded_notset():
     observed = receive_messages('not host', 'not address', 'not password',
-                                sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = None,
                                 mailbox = forwarded)
     n.assert_equal(observed, expect_yes)
 
     observed = receive_messages('not host', 'not address', 'not password',
-                                sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = None,
                                 mailbox = not_forwarded)
     n.assert_equal(observed, expect_yes)
@@ -68,18 +63,15 @@ def test_forwarded_notset():
 def test_sending():
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = 'sending@thomaslevine.com',
-                                forwarding_address = 'forwarding@thomaslevine.com',
                                 mailbox = not_forwarded)
     n.assert_equal(observed, expect_yes)
 
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = None,
-                                forwarding_address = 'sending@thomaslevine.com',
                                 mailbox = not_forwarded)
     n.assert_equal(observed, expect_yes)
 
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = 'incorrect@thomaslevine.com',
-                                forwarding_address = 'sending@thomaslevine.com',
                                 mailbox = forwarded)
     n.assert_equal(observed, expect_no)

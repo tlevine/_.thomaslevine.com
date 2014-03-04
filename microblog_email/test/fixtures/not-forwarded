@@ -1,9 +1,11 @@
-Return-Path: <_@thomaslevine.com>
+Return-Path: <sending@thomaslevine.com>
 Date: Mon, 3 Mar 2014 03:50:53 +0000
-From: Thomas Levine <_@thomaslevine.com>
+From: sending@thomaslevine.com
+To: receiving@thomaslevine.com
 Subject: aoeuaoeu
 Message-ID: <20140303035053.GA18216@occurrence>
 MIME-Version: 1.0
+X-Forwarded-For: forwarding@thomaslevine.com receiving@thomaslevine.com
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 User-Agent: Mutt/1.5.22 (2013-10-16)

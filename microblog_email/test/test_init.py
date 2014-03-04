@@ -44,7 +44,25 @@ def test_forwarded():
                                 sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = None,
                                 mailbox = forwarded)
+    n.assert_equal(observed, expect_yes)
+
+    observed = receive_messages('not host', 'not address', 'not password',
+                                sending_address = 'sending@thomaslevine.com',
+                                forwarding_address = 'blah@thomaslevine.com',
+                                mailbox = forwarded)
     n.assert_equal(observed, expect_no)
+
+    observed = receive_messages('not host', 'not address', 'not password',
+                                sending_address = 'sending@thomaslevine.com',
+                                forwarding_address = 'forwarding@thomaslevine.com',
+                                mailbox = not_forwarded)
+    n.assert_equal(observed, expect_no)
+
+    observed = receive_messages('not host', 'not address', 'not password',
+                                sending_address = 'sending@thomaslevine.com',
+                                forwarding_address = None,
+                                mailbox = not_forwarded)
+    n.assert_equal(observed, expect_yes)
 
 @n.nottest
 def test_sending():

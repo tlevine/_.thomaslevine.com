@@ -26,15 +26,16 @@ def receive_messages(host:str, address:str, password:str,
     Results:
 
     :param target: dict into which results should be placed, or None
+                   The dict gets updated **in place**.
 
     If :code:`target` is :code:`None`, results will be yielded.
     '''
+    if target is None:
+        target = {}
+
     for email in mailbox(host, address, password):
         identifier, date, sent_from, forwarding, subject, body = parse(email)
         if forwarding_address is None or forwarding_address in forwarding:
             if sending_address is None or sending_address in sent_from:
                 results = identifier, date, subject, body
-                if target is None:
-                    yield results
-                else:
-                    target[identifier] = results
+                target[identifier] = results

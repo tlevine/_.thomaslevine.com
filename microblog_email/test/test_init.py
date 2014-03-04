@@ -1,7 +1,6 @@
 import os
 
 import nose.tools as n
-from microblog_email.parse import parse
 
 from microblog_email import receive_messages
 

@@ -9,8 +9,10 @@ def parse(message:bytes) -> tuple:
     message_id = _parse_message_id(m['message-id'])
     date = _parse_date(m['date'])
     subject = m['subject']
+    forwarding = m.get('x-forwarded-for', '')
+    sent_from = m['from']
     body = m.get_payload()
-    return message_id, date, subject, body
+    return message_id, date, sent_from, forwarding, subject, body
 
 def _parse_date(raw_date:str) -> datetime.datetime:
     return mktime(parsedate(raw_date))

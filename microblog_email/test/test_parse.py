@@ -4,8 +4,18 @@ import nose.tools as n
 
 from microblog_email.parse import parse
 
-def test_parse():
-    with open(os.path.join('microblog_email','test','fixtures','forwarded'), 'rb') as fp:
+def expect(forwarding):
+    return ('20140303035053.GA18216', 1393818653.0, '_@thomaslevine.com', forwarding, 'aoeuaoeu', 'oeu\r\n')
+
+def check_parse(fn, forwarding):
+    with open(os.path.join('microblog_email','test','fixtures',fn), 'rb') as fp:
         observed = parse(fp.read())
-        expected = ('20140303035053.GA18216', 1393818653.0, 'aoeuaoeu', 'oeu\r\n')
-        n.assert_tuple_equal(observed, expected)
+        n.assert_tuple_equal(observed, expect(forwarding))
+
+testcases = [
+    ('forwarded', 'supersecretaddress@thomaslevine.com anothersupersecretaddress@thomaslevine.com'),
+    ('not-forwarded', ''),
+]
+def test_parse():
+    for fn, forwarding in testcases:
+        yield check_parse, fn, forwarding

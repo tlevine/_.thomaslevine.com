@@ -32,7 +32,7 @@ def test_target_dict():
                      mailbox = forwarded)
     n.assert_equal(observed, expect_yes)
 
-def test_forwarded_set():
+def test_forwarded_set_match():
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = 'forwarding@thomaslevine.com',
@@ -41,14 +41,15 @@ def test_forwarded_set():
 
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = 'sending@thomaslevine.com',
-                                forwarding_address = 'blah@thomaslevine.com',
-                                mailbox = forwarded)
-    n.assert_equal(observed, expect_no)
-
-    observed = receive_messages('not host', 'not address', 'not password',
-                                sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = 'forwarding@thomaslevine.com',
                                 mailbox = not_forwarded)
+    n.assert_equal(observed, expect_no)
+
+def test_forwarded_set_nomatch():
+    observed = receive_messages('not host', 'not address', 'not password',
+                                sending_address = 'sending@thomaslevine.com',
+                                forwarding_address = 'blah@thomaslevine.com',
+                                mailbox = forwarded)
     n.assert_equal(observed, expect_no)
 
 def test_forwarded_notset():

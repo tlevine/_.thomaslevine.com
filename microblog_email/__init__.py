@@ -4,7 +4,7 @@ from microblog_email.parse import parse
 def receive_messages(host:str, address:str, password:str,
                      sending_address:str = None,
                      forwarding_address:str = None,
-                     target:dict = {},
+                     target:dict = None,
                      mailbox = _mailbox):
     '''
     Retrieve messages from an IMAP mailbox. Optionally require that messages
@@ -32,6 +32,8 @@ def receive_messages(host:str, address:str, password:str,
 
     Returns a dict
     '''
+    if target is None:
+        target = {}
     for email in mailbox(host, address, password):
         identifier, date, sent_from, forwarding, subject, body = parse(email)
         if forwarding_address is None or forwarding_address in forwarding:

@@ -18,43 +18,44 @@ def not_forwarded(*args, **kwargs):
     for i in range(3):
         yield fixtures['not-forwarded']
 
-expected_forwarded = {'20140303035053.GA18216': ('20140303035053.GA18216', 1393818653.0, 'aoeuaoeu', 'oeu\r\n')}
-expected_not_forwarded = {}
+expect_yes = {'20140303035053.GA18216': ('20140303035053.GA18216', 1393818653.0, 'aoeuaoeu', 'oeu\r\n')}
+expect_no = {}
 
 def test_no_target():
     observed = receive_messages('not host', 'not address', 'not password',
                                 mailbox = forwarded)
-    n.assert_equal(observed, expected_forwarded)
+    n.assert_equal(observed, expect_yes)
 
 def test_target_dict():
     observed = {}
     receive_messages('not host', 'not address', 'not password',
                      target = observed,
                      mailbox = forwarded)
-    n.assert_equal(observed, expected_forwarded)
+    n.assert_equal(observed, expect_yes)
 
 def test_forwarded():
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = 'forwarding@thomaslevine.com',
                                 mailbox = forwarded)
-    n.assert_equal(observed, expected_forwarded)
+    n.assert_equal(observed, expect_yes)
 
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = None,
                                 mailbox = forwarded)
-    n.assert_equal(observed, expected_not_forwarded)
+    n.assert_equal(observed, expect_no)
 
+@n.nottest
 def test_sending():
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = 'sending@thomaslevine.com',
                                 forwarding_address = 'forwarding@thomaslevine.com',
                                 mailbox = not_forwarded)
-    n.assert_equal(observed, expected_forwarded)
+    n.assert_equal(observed, expect_yes)
 
     observed = receive_messages('not host', 'not address', 'not password',
                                 sending_address = None,
                                 forwarding_address = 'sending@thomaslevine.com',
                                 mailbox = not_forwarded)
-    n.assert_equal(observed, expected_not_forwarded)
+    n.assert_equal(observed, expect_no)

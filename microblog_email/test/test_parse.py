@@ -5,7 +5,7 @@ import nose.tools as n
 from microblog_email.parse import parse
 
 def expect(forwarding):
-    return ('20140303035053.GA18216', 1393818653.0, '_@thomaslevine.com', forwarding, 'aoeuaoeu', 'oeu\r\n')
+    return ('20140303035053.GA18216', 1393818653.0, 'Thomas Levine <_@thomaslevine.com>', forwarding, 'aoeuaoeu', 'oeu\r\n')
 
 def check_parse(fn, forwarding):
     with open(os.path.join('microblog_email','test','fixtures',fn), 'rb') as fp:

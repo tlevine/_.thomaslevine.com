@@ -13,13 +13,13 @@ app = Bottle()
 def root():
     return templates.render_root(query.seq(messages, 0, 10))
 
-@app.get('/<message_id>')
-def post(message_id):
-    if message_id in messages:
-        return templates.render_post(messages[message_id])
+@app.get('/<identifier>')
+def post(identifier):
+    if identifier in messages:
+        return templates.render_post(messages[identifier])
     else:
-        abort(404, "There's no post with this message-id.")
+        abort(404, "There's no post with this identifier.")
 
-@app.route('/<message_id>/')
-def slash(message_id):
-    redirect('/' + message_id)
+@app.route('/<identifier>/')
+def slash(identifier):
+    redirect('/' + identifier)

@@ -1,7 +1,7 @@
 from microblog_email.retrieve import mailbox as _mailbox
 from microblog_email.parse import parse
 
-def receive_messages(host:str, address:str, password:str
+def receive_messages(host:str, address:str, password:str,
                      sending_address:str = None,
                      forwarding_address:str = None,
                      target:dict = None,

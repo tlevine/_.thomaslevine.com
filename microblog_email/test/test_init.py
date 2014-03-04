@@ -21,7 +21,7 @@ def not_forwarded(*args, **kwargs):
 expected_forwarded = {'20140303035053.GA18216': ('20140303035053.GA18216', 1393818653.0, 'aoeuaoeu', 'oeu\r\n')}
 expected_not_forwarded = {}
 
-def test_target_none():
+def test_no_target():
     observed = receive_messages('not host', 'not address', 'not password',
                                 mailbox = forwarded)
     n.assert_equal(observed, expected_forwarded)

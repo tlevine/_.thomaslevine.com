@@ -38,3 +38,4 @@ def receive_messages(host:str, address:str, password:str,
             if sending_address is None or sending_address in sent_from:
                 results = identifier, date, subject, body
                 target[identifier] = results
+    return target

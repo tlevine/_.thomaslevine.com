@@ -15,7 +15,15 @@ def search(querystr):
     query = Query(db, querystr).search_threads()
     threads = [('/threads/' + t.get_thread_id(), t.get_subject()) \
                for t in query]
-    return {'messages': threads}
+    return {
+        'heading': 'Results for "%s"' % querystr,
+        'list': threads
+    }
+
+def _get_thread(thread_id):
+    querystr = 'thread:' + thread_id
+    thread = next(iter(Query(db, querystr).search_threads()))
+    return thread.get_subject()
 
 @app.get('/threads/:thread_id')
 @view('flat')
@@ -25,7 +33,10 @@ def thread(thread_id):
         return 'Thread not found', 404
     messages = [('/messages/' + m.get_message_id(), m.get_header('subject')) \
                 for m in query.search_messages()]
-    return {'messages': messages}
+    return {
+        'heading': _get_thread(thread_id).get_subject(),
+        'list': messages
+    }
 
 @app.get('/messages/:message_id')
 @view('message')
@@ -35,7 +46,7 @@ def message(message_id):
         return 'Message not found', 404
     m = next(query.search_messages())
     return {
-        'subject': m.get_header('subject'),
+        'heading': m.get_header('subject'),
         'body': m.get_part(1),
     }
 
@@ -45,9 +56,12 @@ def recent():
     query = Query(db, '')
     messages = []
     for i, m in enumerate(query.search_messages()):
-        if i >= 5:
+        if i >= 30:
             break
         messages.append(('/messages/' + m.get_message_id(), m.get_header('subject')))
-    return {'messages': messages}
+    return {
+        'heading': 'Recent messages',
+        'list': messages,
+    }
 
 app.run()

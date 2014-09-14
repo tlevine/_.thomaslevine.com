@@ -34,7 +34,6 @@ def message(message_id):
     if not query.count_messages() == 1:
         return 'Message not found', 404
     m = next(query.search_messages())
-    print(m)
     return {
         'subject': m.get_header('subject'),
         'body': m.get_part(1),
